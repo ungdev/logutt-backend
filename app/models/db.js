@@ -1,13 +1,13 @@
 const mariadb = require("mariadb");
-const dbConfig = require("../config/db.config");
+require('dotenv').config()
 
 // Create a connection to the database
 const connection = mariadb.createConnection({
-    host: dbConfig.HOST,
-    port: dbConfig.PORT,
-    user: dbConfig.USER,
-    password: dbConfig.PASSWORD,
-    database: dbConfig.DB
+    host: process.env.DB_HOST,
+    port: process.env.DB_PORT,
+    user: process.env.DB_USER,
+    password: process.env.DB_PASS,
+    database: process.env.DB_NAME
 });
 
 // test MariaDB connection

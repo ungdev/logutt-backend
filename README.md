@@ -3,7 +3,7 @@
 ## Project setup
 
 - `npm install`
-- Create db.conf
+- Create .env
 
 ## Run server
 
