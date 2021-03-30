@@ -5,7 +5,7 @@
 - `npm install`
 - Create db.conf
 
-## Run serve
+## Run server
 
 ```
 npm start
