@@ -18,5 +18,4 @@ connection.then(conn => {
     console.log("not connected due to error: " + err);
   });
 
-
 module.exports = connection;

@@ -8,7 +8,7 @@ module.exports = (req, res, next) => {
 
         if(req.body.appID && req.body.appID !== appID){
             throw 'Invalid APP ID';
-        }else{
+        } else {
             next();
         }
     } catch{

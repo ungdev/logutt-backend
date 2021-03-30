@@ -10,16 +10,12 @@ const Partner = function (partner) {
 
 
 Partner.allPartners = function (result) {
-
     sql.query("SELECT * from partner", function (err, res) {
-
             if(err) {
                 console.log("error: ", err);
                 result(null, err);
-            }
-            else{
-                
-             result(null, res);
+            } else {
+                result(null, res);
             }
         });   
 };
