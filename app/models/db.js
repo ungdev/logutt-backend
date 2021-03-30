@@ -1,8 +1,8 @@
-const mysql = require("mysql");
+const mariadb = require("mariadb");
 const dbConfig = require("../config/db.config");
 
 // Create a connection to the database
-const connection = mysql.createConnection({
+const connection = mariadb.createConnection({
     host: dbConfig.HOST,
     port: dbConfig.PORT,
     user: dbConfig.USER,
@@ -10,10 +10,13 @@ const connection = mysql.createConnection({
     database: dbConfig.DB
 });
 
-// open the MySQL connection
-connection.connect(error => {
-    if (error) throw error;
-    console.log("Successfully connected to the database.");
-});
+// test MariaDB connection
+connection.then(conn => {
+    console.log("connected ! connection id is " + conn.threadId);
+  })
+  .catch(err => {
+    console.log("not connected due to error: " + err);
+  });
+
 
 module.exports = connection;

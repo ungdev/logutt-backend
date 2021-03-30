@@ -1,0 +1,23 @@
+# compiled output
+/dist
+/tmp
+/out-tsc
+
+# IDE - VSCode
+.vscode/
+
+# Dependency directories
+node_modules/
+
+# Optional npm cache directory
+.npm
+
+# Output of 'npm pack'
+*.tgz
+
+# dotenv environment variables file
+.env
+
+# System Files
+.DS_Store
+Thumbs.db
