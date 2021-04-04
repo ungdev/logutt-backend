@@ -1,5 +1,4 @@
 const mariadb = require("mariadb");
-require('dotenv').config()
 
 // Create a connection to the database
 const connection = mariadb.createConnection({

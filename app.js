@@ -1,9 +1,8 @@
 const express = require('express');
 const bodyParser = require('body-parser');
-const partnerRoutes = require('./app/routes/partner_routes')
+require('dotenv').config()
 
 const app = express();
-
 
 app.use((req, res, next) => {
     res.setHeader('Access-Control-ALlow-Origin', '*');
@@ -13,8 +12,10 @@ app.use((req, res, next) => {
 
 });
 
+// Normal express config defaults
+app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 
-app.use('/api/partner', partnerRoutes);
+app.use(require('./app/routes'));
 
 module.exports = app;
