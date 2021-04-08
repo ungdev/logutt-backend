@@ -1,4 +1,4 @@
-const mariadb = require("mariadb");
+const mariadb = require("mysql");
 
 // Create a connection to the database
 const connection = mariadb.createConnection({
@@ -9,12 +9,10 @@ const connection = mariadb.createConnection({
     database: process.env.DB_NAME
 });
 
-// test MariaDB connection
-connection.then(conn => {
-    console.log("connected ! connection id is " + conn.threadId);
-  })
-  .catch(err => {
-    console.log("not connected due to error: " + err);
-  });
+// test DB connection
+connection.connect(error => {
+  if (error) throw error;
+  console.log("Successfully connected to the database.");
+});
 
 module.exports = connection;
