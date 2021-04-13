@@ -43,11 +43,11 @@ exports.findOne = (req, res) => {
         if (err) {
             if (err.kind === "not_found") {
             res.status(404).send({
-                message: `Not found Objet with id ${req.params.customerId}.`
+                message: `Not found Objet with id ${req.params.objectId}.`
             });
             } else {
             res.status(500).send({
-                message: "Error retrieving Object with id " + req.params.customerId
+                message: "Error retrieving Object with id " + req.params.objectId
             });
             }
         } else res.send(data);
@@ -63,15 +63,15 @@ exports.update = (req, res) => {
         });
     }
 
-    Object.updateById(req.params.objectId, new Object(req.body), (err, data) => {
+    Object.updateById(req.params.objectId, req.body, (err, data) => {
         if (err) {
             if (err.kind === "not_found") {
                 res.status(404).send({
-                    message: `Not found Object with id ${req.params.customerId}.`
+                    message: `Not found Object with id ${req.params.objectId}.`
                 });
             } else {
                 res.status(500).send({
-                    message: "Error updating Object with id " + req.params.customerId
+                    message: "Error updating Object with id " + req.params.objectId
                 });
             }
         } else res.send(data);
