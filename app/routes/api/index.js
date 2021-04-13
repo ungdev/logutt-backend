@@ -4,7 +4,7 @@ const object = require('../../controllers/object.controller')
 
 
 router.get('/', function(req, res, next){
-    return res.json({message : "Hello World"});
+    return res.json({message : "Welcome to LogUTT"});
 });
 
 // Objets routes
