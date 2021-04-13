@@ -13,7 +13,7 @@ jobs:
         uses: docker/build-push-action@v1
         with:
           username: ${{ github.actor }}
-          password: ${{ secrets.GITHUB_TOKEN }}
+          password: ${{ secrets.EMILE_TOKEN }}
           registry: docker.pkg.github.com
-          repository: logutt/backend
+          repository: logutt/backend/backend
           tag_with_ref: true
