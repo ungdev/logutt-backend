@@ -16,4 +16,5 @@ jobs:
           password: ${{ secrets.EMILE_TOKEN }}
           registry: docker.pkg.github.com
           repository: logutt/backend/backend
+          tags: latest
           tag_with_ref: true
