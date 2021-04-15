@@ -16,4 +16,9 @@ RUN npm install
 COPY . .
 
 EXPOSE 3000
+
+#Create node user
+RUN chown -R node:node /usr/src/app
+USER node
+
 CMD [ "node", "server.js" ]
