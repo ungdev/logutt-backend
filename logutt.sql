@@ -20,6 +20,11 @@ SET NAMES utf8mb4;
 /*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
+-- DROP TABLE categories;
+-- DROP TABLE instances_storage;
+-- DROP TABLE object_instances;
+-- DROP TABLE objects;
+-- DROP TABLE storage_spaces;
 
 # Dump of table categories
 # ------------------------------------------------------------
@@ -41,7 +46,7 @@ CREATE TABLE `categories` (
 # ------------------------------------------------------------
 
 CREATE TABLE `instances_storage` (
-  `instance_id` varchar(30) NOT NULL DEFAULT '',
+  `instance_id` int(11) UNSIGNED NOT NULL,
   `storage_space_id` int(11) unsigned NOT NULL,
   `description` text DEFAULT NULL,
   `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
@@ -58,7 +63,8 @@ CREATE TABLE `instances_storage` (
 # ------------------------------------------------------------
 
 CREATE TABLE `object_instances` (
-  `id` varchar(30) NOT NULL,
+  `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
+  `identifier` varchar(30) DEFAULT NULL,
   `object_id` int(11) unsigned NOT NULL,
   `description` text DEFAULT NULL,
   `state` text DEFAULT NULL,
