@@ -3,6 +3,7 @@ const router = require('express').Router();
 const object = require('../../controllers/object.controller')
 const objectInstance = require('../../controllers/objectInstance.controller')
 const category = require('../../controllers/category.controller')
+const storage = require('../../controllers/storage.controller')
 
 
 router.get('/', function(req, res, next){
@@ -29,5 +30,12 @@ router.get("/categories", category.findAll);
 router.get("/categories/:categoryId", category.findOne);
 router.put("/categories/:categoryId", category.update);
 router.delete("/categories/:categoryId", category.delete);
+
+// Storages routes
+router.post("/storages", storage.create);
+router.get("/storages", storage.findAll);
+router.get("/storages/:storageId", storage.findOne);
+router.put("/storages/:storageId", storage.update);
+router.delete("/storages/:storageId", storage.delete);
 
 module.exports = router;
