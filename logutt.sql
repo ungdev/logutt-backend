@@ -7,7 +7,7 @@
 #
 # Host: 127.0.0.1 (MySQL 5.5.5-10.5.9-MariaDB)
 # Database: logutt
-# Generation Time: 2021-04-08 11:38:30 +0000
+# Generation Time: 2021-04-21 12:24:22 +0000
 # ************************************************************
 
 
@@ -20,11 +20,17 @@ SET NAMES utf8mb4;
 /*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
--- DROP TABLE categories;
--- DROP TABLE instances_storage;
--- DROP TABLE object_instances;
--- DROP TABLE objects;
--- DROP TABLE storage_spaces;
+
+# Dump of table associations
+# ------------------------------------------------------------
+
+CREATE TABLE `associations` (
+  `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
+  `name` varchar(50) NOT NULL DEFAULT '',
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+
 
 # Dump of table categories
 # ------------------------------------------------------------
@@ -46,7 +52,7 @@ CREATE TABLE `categories` (
 # ------------------------------------------------------------
 
 CREATE TABLE `instances_storage` (
-  `instance_id` int(11) UNSIGNED NOT NULL,
+  `instance_id` int(11) unsigned NOT NULL,
   `storage_space_id` int(11) unsigned NOT NULL,
   `description` text DEFAULT NULL,
   `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
@@ -87,13 +93,16 @@ CREATE TABLE `objects` (
   `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
   `name` varchar(50) NOT NULL DEFAULT '',
   `description` text DEFAULT NULL,
+  `association_id` int(10) unsigned NOT NULL,
   `category_id` int(11) unsigned DEFAULT NULL,
   `lendable` tinyint(1) NOT NULL DEFAULT 0,
   `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
   `updated_at` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
   PRIMARY KEY (`id`),
   KEY `category_id` (`category_id`),
-  CONSTRAINT `objects_ibfk_1` FOREIGN KEY (`category_id`) REFERENCES `categories` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
+  KEY `association_id` (`association_id`),
+  CONSTRAINT `objects_ibfk_1` FOREIGN KEY (`category_id`) REFERENCES `categories` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  CONSTRAINT `objects_ibfk_2` FOREIGN KEY (`association_id`) REFERENCES `associations` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 
