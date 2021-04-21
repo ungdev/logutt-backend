@@ -4,6 +4,7 @@ const object = require('../../controllers/object.controller')
 const objectInstance = require('../../controllers/objectInstance.controller')
 const category = require('../../controllers/category.controller')
 const storage = require('../../controllers/storage.controller')
+const association = require('../../controllers/association.controller')
 
 
 router.get('/', function(req, res, next){
@@ -37,5 +38,12 @@ router.get("/storages", storage.findAll);
 router.get("/storages/:storageId", storage.findOne);
 router.put("/storages/:storageId", storage.update);
 router.delete("/storages/:storageId", storage.delete);
+
+// Associations routes
+router.post("/associations", association.create);
+router.get("/associations", association.findAll);
+router.get("/associations/:associationId", association.findOne);
+router.put("/associations/:associationId", association.update);
+router.delete("/associations/:associationId", association.delete);
 
 module.exports = router;

@@ -24,7 +24,7 @@ exports.create = (req, res) => {
     });
 };
 
-// Retrieve all Objects from the database.
+// Retrieve all Storages from the database.
 exports.findAll = (req, res) => {
     Storage.getAll((err, data) => {
         if (err)
@@ -41,7 +41,7 @@ exports.findOne = (req, res) => {
         if (err) {
             if (err.kind === "not_found") {
             res.status(404).send({
-                message: `Not found Objet with id ${req.params.storageId}.`
+                message: `Not found Storage with id ${req.params.storageId}.`
             });
             } else {
             res.status(500).send({
@@ -76,7 +76,7 @@ exports.update = (req, res) => {
     });
 };
 
-// Delete a Storage with the specified ObjectId in the request
+// Delete a Storage with the specified storageId in the request
 exports.delete = (req, res) => {
     Storage.remove(req.params.storageId, (err, data) => {
         if (err) {
