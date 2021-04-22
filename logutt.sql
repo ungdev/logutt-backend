@@ -7,7 +7,7 @@
 #
 # Host: 127.0.0.1 (MySQL 5.5.5-10.5.9-MariaDB)
 # Database: logutt
-# Generation Time: 2021-04-21 12:24:22 +0000
+# Generation Time: 2021-04-22 11:34:35 +0000
 # ************************************************************
 
 
@@ -48,23 +48,6 @@ CREATE TABLE `categories` (
 
 
 
-# Dump of table instances_storage
-# ------------------------------------------------------------
-
-CREATE TABLE `instances_storage` (
-  `instance_id` int(11) unsigned NOT NULL,
-  `storage_space_id` int(11) unsigned NOT NULL,
-  `description` text DEFAULT NULL,
-  `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
-  `updated_at` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
-  PRIMARY KEY (`instance_id`,`storage_space_id`),
-  KEY `storage_space_id` (`storage_space_id`),
-  CONSTRAINT `instances_storage_ibfk_2` FOREIGN KEY (`storage_space_id`) REFERENCES `storage_spaces` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
-  CONSTRAINT `instances_storage_ibfk_3` FOREIGN KEY (`instance_id`) REFERENCES `object_instances` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-
-
-
 # Dump of table object_instances
 # ------------------------------------------------------------
 
@@ -73,6 +56,9 @@ CREATE TABLE `object_instances` (
   `identifier` varchar(30) DEFAULT NULL,
   `object_id` int(11) unsigned NOT NULL,
   `description` text DEFAULT NULL,
+  `association_id` int(11) unsigned NOT NULL,
+  `storage_id` int(10) unsigned NOT NULL,
+  `storage_description` text DEFAULT NULL,
   `state` text DEFAULT NULL,
   `deposit` double DEFAULT NULL,
   `expiration` date DEFAULT NULL,
@@ -81,7 +67,11 @@ CREATE TABLE `object_instances` (
   `updated_at` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
   PRIMARY KEY (`id`),
   KEY `object_id` (`object_id`),
-  CONSTRAINT `object_instances_ibfk_1` FOREIGN KEY (`object_id`) REFERENCES `objects` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
+  KEY `association_id` (`association_id`),
+  KEY `storage_id` (`storage_id`),
+  CONSTRAINT `object_instances_ibfk_1` FOREIGN KEY (`object_id`) REFERENCES `objects` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  CONSTRAINT `object_instances_ibfk_2` FOREIGN KEY (`association_id`) REFERENCES `associations` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  CONSTRAINT `object_instances_ibfk_3` FOREIGN KEY (`storage_id`) REFERENCES `storage_spaces` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 
@@ -93,16 +83,13 @@ CREATE TABLE `objects` (
   `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
   `name` varchar(50) NOT NULL DEFAULT '',
   `description` text DEFAULT NULL,
-  `association_id` int(10) unsigned NOT NULL,
   `category_id` int(11) unsigned DEFAULT NULL,
   `lendable` tinyint(1) NOT NULL DEFAULT 0,
   `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
   `updated_at` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
   PRIMARY KEY (`id`),
   KEY `category_id` (`category_id`),
-  KEY `association_id` (`association_id`),
-  CONSTRAINT `objects_ibfk_1` FOREIGN KEY (`category_id`) REFERENCES `categories` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
-  CONSTRAINT `objects_ibfk_2` FOREIGN KEY (`association_id`) REFERENCES `associations` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
+  CONSTRAINT `objects_ibfk_1` FOREIGN KEY (`category_id`) REFERENCES `categories` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 
