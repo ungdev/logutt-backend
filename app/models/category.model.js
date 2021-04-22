@@ -1,5 +1,5 @@
-const sql = require("./db.js");
-const SqlHandler = require('./sqlHandler');
+const sql = require("../config/db");
+const SqlHandler = require('./handler/sqlHandler');
 
 // constructor
 const Category = function(category) {
