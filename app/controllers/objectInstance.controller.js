@@ -10,14 +10,18 @@ exports.create = (req, res) => {
     }
     // Create a ObjectInstance
     const objectInstance = new ObjectInstance({
-        identifier: ObjectInstance.identifier,
-        description: ObjectInstance.description,
-        state: ObjectInstance.state,
+        identifier: req.body.identifier,
+        description: req.body.description,
+        state: req.body.state,
         deposit: ObjectInstance.deposit,
-        expiration: ObjectInstance.expiration,
-        quantity: ObjectInstance.quantity,
+        expiration: req.body.expiration,
+        quantity: req.body.quantity,
         object_id: req.params.objectId,
+        association_id: req.body.association_id,
+        storage_id: req.body.storage_id,
     });
+    console.log(objectInstance);
+    console.log(objectInstance);
 
     // Save ObjectInstance in the database
     ObjectInstance.create(objectInstance, (err, data) => {

@@ -9,7 +9,10 @@ const ObjectInstance = function(ObjectInstance) {
   this.deposit = ObjectInstance.deposit;
   this.expiration = ObjectInstance.expiration;
   this.quantity = ObjectInstance.quantity ?? 1;
+  this.storage_description = ObjectInstance.storage_description;
   this.object_id = ObjectInstance.object_id;
+  this.association_id = ObjectInstance.association_id;
+  this.storage_id = ObjectInstance.storage_id;
 };
 
 ObjectInstance.create = (newObjectInstance, result) => {
