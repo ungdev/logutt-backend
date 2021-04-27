@@ -10,26 +10,38 @@ const objectModel = require('../object.model');
 const objectInstanceModel = require('../objectInstance.model');
 const storageModel = require('../storage.model');
 
+function sqlHandler(err) {
+  if (err) {
+    throw err;
+  }
+}
+
 exports.generateData = async (req, res) => {
-    let listAssociation = await associationFixture.create();
-    let listCategory = await categoryFixture.create();
-    let listObject = await objectFixture.create();
-    let listStorage = await storageFixture.create();
-    let listObjectInstance1 = await objectInstanceFixture.create(1);
-    let listObjectInstance2 = await objectInstanceFixture.create(2);
-    
-    listAssociation.forEach(element => { associationModel.create(element, sqlHandler) })
-    listCategory.forEach(element => { categoryModel.create(element, sqlHandler) })
-    listObject.forEach(element => { objectModel.create(element, sqlHandler) })
-    listStorage.forEach(element => { storageModel.create(element, sqlHandler) })
+  const listAssociation = await associationFixture.create();
+  const listCategory = await categoryFixture.create();
+  const listObject = await objectFixture.create();
+  const listStorage = await storageFixture.create();
+  const listObjectInstance1 = await objectInstanceFixture.create(1);
+  const listObjectInstance2 = await objectInstanceFixture.create(2);
 
-    listObjectInstance1.forEach(element => { objectInstanceModel.create(element, sqlHandler) })
-    listObjectInstance2.forEach(element => { objectInstanceModel.create(element, sqlHandler) })
-    res.send('ok');
-}
+  listAssociation.forEach((element) => {
+    associationModel.create(element, sqlHandler);
+  });
+  listCategory.forEach((element) => {
+    categoryModel.create(element, sqlHandler);
+  });
+  listObject.forEach((element) => {
+    objectModel.create(element, sqlHandler);
+  });
+  listStorage.forEach((element) => {
+    storageModel.create(element, sqlHandler);
+  });
 
-function sqlHandler (err, res) {
-    if (err) {
-        throw err
-    }
-}
+  listObjectInstance1.forEach((element) => {
+    objectInstanceModel.create(element, sqlHandler);
+  });
+  listObjectInstance2.forEach((element) => {
+    objectInstanceModel.create(element, sqlHandler);
+  });
+  res.send('ok');
+};

@@ -1,33 +1,44 @@
-const sql = require("../config/db");
+const sql = require('../config/db');
 const SqlHandler = require('./handler/sqlHandler');
 
 // constructor
-const Association = function(association) {
+const Association = function Association(association) {
   this.name = association.name;
 };
 
 Association.create = (newAssociation, result) => {
-  sql.query("INSERT INTO associations SET ?", newAssociation, SqlHandler.create(result, newAssociation));
+  sql.query(
+    'INSERT INTO associations SET ?',
+    newAssociation,
+    SqlHandler.create(result, newAssociation)
+  );
 };
 
-Association.getAll = result => {
-  sql.query("SELECT * FROM associations", SqlHandler.getAll(result));
+Association.getAll = (result) => {
+  sql.query('SELECT * FROM associations', SqlHandler.getAll(result));
 };
 
 Association.findById = (id, result) => {
-  sql.query(`SELECT * FROM associations WHERE id = ${id}`, SqlHandler.findById(result));
+  sql.query(
+    `SELECT * FROM associations WHERE id = ${id}`,
+    SqlHandler.findById(result)
+  );
 };
 
 Association.updateById = (id, association, result) => {
   sql.query(
-    "UPDATE associations SET ? WHERE id = ?",
+    'UPDATE associations SET ? WHERE id = ?',
     [association, id],
     SqlHandler.updateById(result, association, id)
   );
 };
 
 Association.remove = (id, result) => {
-  sql.query("DELETE FROM associations WHERE id = ?", id, SqlHandler.remove(result));
+  sql.query(
+    'DELETE FROM associations WHERE id = ?',
+    id,
+    SqlHandler.remove(result)
+  );
 };
 
 module.exports = Association;

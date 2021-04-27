@@ -1,21 +1,18 @@
-const axios = require("axios");
+const axios = require('axios');
 
 const ApiService = {
-
   setHeader(token) {
-    axios.defaults.headers.common[
-      "Authorization"
-    ] = `Token ${token}`;
+    axios.defaults.headers.common.Authorization = `Token ${token}`;
   },
-  
+
   query(resource, params) {
-    return axios.get(resource, params).catch(error => {
+    return axios.get(resource, params).catch((error) => {
       throw new Error(`[RWV] ApiService ${error}`);
     });
   },
 
-  get(resource, slug = "") {
-    return axios.get(`${resource}/${slug}`).catch(error => {
+  get(resource, slug = '') {
+    return axios.get(`${resource}/${slug}`).catch((error) => {
       throw new Error(`[RWV] ApiService ${error}`);
     });
   },
@@ -33,10 +30,10 @@ const ApiService = {
   },
 
   delete(resource, slug) {
-    return axios.delete(`${resource}/${slug}`).catch(error => {
+    return axios.delete(`${resource}/${slug}`).catch((error) => {
       throw new Error(`[RWV] ApiService ${error}`);
     });
-  }
+  },
 };
 
 module.exports = ApiService;
