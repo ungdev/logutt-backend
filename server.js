@@ -1,31 +1,3 @@
-/*
-const express = require('express');
-const bodyParser = require("body-parser");
-
-const app = express();
-const port = 8080;
-
-// parse requests of content-type: application/json
-app.use(bodyParser.json());
-
-// parse requests of content-type: application/x-www-form-urlencoded
-app.use(bodyParser.urlencoded({ extended: true }));
-
-
-// Route
-app.get('/', (req, res) => res.json({message: 'Hello World!'}));
-
-app.post('/', (req, res) => res.json({message: 'Hello World POST!'}));
-
-
-// set port, listen for requests
-
-require("./app/routes/partner_routes.js")(app);
-
-app.listen(port, () => console.log(`Example app listening on port ${port}!`));
-
-*/
-
 const http = require('http');
 const app = require('./app');
 

@@ -9,7 +9,7 @@ exports.create = (result, newElement) => (err, res) => {
 
 exports.getAll = (result) => (err, res) => {
   if (err) {
-    result(null, err);
+    result(err, null);
     return;
   }
 
