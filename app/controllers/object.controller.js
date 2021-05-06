@@ -63,8 +63,15 @@ exports.update = (req, res) => {
       message: 'Content can not be empty!',
     });
   }
+  // Create a Object
+  const object = new Object({
+    name: req.body.name,
+    description: req.body.description,
+    category_id: req.body.category_id,
+    lendable: req.body.loanable,
+  });
 
-  Object.updateById(req.params.objectId, req.body, (err, data) => {
+  Object.updateById(req.params.objectId, object, (err, data) => {
     if (err) {
       if (err.kind === 'not_found') {
         res.status(404).send({
