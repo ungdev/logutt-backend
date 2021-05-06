@@ -1,7 +1,7 @@
 const Object = require('../object.model');
 const FakerService = require('../../service/faker.service');
 
-exports.create = async () => {
+exports.create = async (id) => {
   const listName = await FakerService.post('Product').then(
     (response) => response.data.results
   );
@@ -17,7 +17,8 @@ exports.create = async () => {
       new Object({
         name: listName[i],
         description: listDescription[i],
-        lendable: listLendable[i],
+        lendable: listLendable[i] === 'true' ? 1 : 0,
+        category_id: id,
       })
     );
   }

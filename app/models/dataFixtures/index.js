@@ -19,7 +19,8 @@ function sqlHandler(err) {
 exports.generateData = async (req, res) => {
   const listAssociation = await associationFixture.create();
   const listCategory = await categoryFixture.create();
-  const listObject = await objectFixture.create();
+  const listObject = await objectFixture.create(1);
+  const listObject2 = await objectFixture.create(2);
   const listStorage = await storageFixture.create();
   const listObjectInstance1 = await objectInstanceFixture.create(1);
   const listObjectInstance2 = await objectInstanceFixture.create(2);
@@ -31,6 +32,9 @@ exports.generateData = async (req, res) => {
     categoryModel.create(element, sqlHandler);
   });
   listObject.forEach((element) => {
+    objectModel.create(element, sqlHandler);
+  });
+  listObject2.forEach((element) => {
     objectModel.create(element, sqlHandler);
   });
   listStorage.forEach((element) => {
