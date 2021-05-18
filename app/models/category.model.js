@@ -16,7 +16,11 @@ Category.create = (newCategory, result) => {
 };
 
 Category.getAll = (result) => {
-  sql.query('SELECT * FROM categories', SqlHandler.getAll(result));
+  sql.query('SELECT * FROM categories WHERE parent_id IS NULL', SqlHandler.getAll(result));
+};
+
+Category.getAllSubCategories = (parentId, result) => {
+  sql.query('SELECT * FROM categories WHERE parent_id = ?', parentId, SqlHandler.getAll(result));
 };
 
 Category.findById = (categoryId, result) => {

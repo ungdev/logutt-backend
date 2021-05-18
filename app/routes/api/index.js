@@ -35,6 +35,7 @@ router.delete(
 router.post('/categories', category.create);
 router.get('/categories', category.findAll);
 router.get('/categories/:categoryId', category.findOne);
+router.get('/categories/:parentId/sub', category.findAllSubCategories);
 router.put('/categories/:categoryId', category.update);
 router.delete('/categories/:categoryId', category.delete);
 
