@@ -1,5 +1,6 @@
 const router = require('express').Router();
 
+const authentification = require('../../controllers/authentification.controller');
 const object = require('../../controllers/object.controller');
 const objectInstance = require('../../controllers/objectInstance.controller');
 const category = require('../../controllers/category.controller');
@@ -7,6 +8,8 @@ const storage = require('../../controllers/storage.controller');
 const association = require('../../controllers/association.controller');
 
 router.get('/', (req, res) => res.json({ message: 'Welcome to LogUTT' }));
+
+router.post('/login', authentification.login);
 
 // Objets routes
 router.post('/objects', object.create);
