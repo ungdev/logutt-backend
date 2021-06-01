@@ -13,7 +13,7 @@ exports.create = (req, res) => {
     name: req.body.name,
     description: req.body.description,
     category_id: req.body.category_id,
-    lendable: req.body.loanable,
+    lendable: req.body.lendable,
   });
 
   // Save Object in the database
@@ -68,7 +68,7 @@ exports.update = (req, res) => {
     name: req.body.name,
     description: req.body.description,
     category_id: req.body.category_id,
-    lendable: req.body.loanable,
+    lendable: req.body.lendable,
   });
 
   Object.updateById(req.params.objectId, object, (err, data) => {
