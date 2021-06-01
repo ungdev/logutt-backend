@@ -6,6 +6,7 @@ const objectInstance = require('../../controllers/objectInstance.controller');
 const category = require('../../controllers/category.controller');
 const storage = require('../../controllers/storage.controller');
 const association = require('../../controllers/association.controller');
+const user = require('../../controllers/user.controller');
 
 router.get('/', (req, res) => res.json({ message: 'Welcome to LogUTT' }));
 
@@ -55,5 +56,12 @@ router.get('/associations', association.findAll);
 router.get('/associations/:associationId', association.findOne);
 router.put('/associations/:associationId', association.update);
 router.delete('/associations/:associationId', association.delete);
+
+// Users routes
+router.post('/users', user.create);
+router.get('/users', user.findAll);
+router.get('/users/:userId', user.findOne);
+router.put('/users/:userId', user.update);
+router.delete('/users/:userId', user.delete);
 
 module.exports = router;
