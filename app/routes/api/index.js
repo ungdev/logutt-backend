@@ -7,6 +7,7 @@ const category = require('../../controllers/category.controller');
 const storage = require('../../controllers/storage.controller');
 const association = require('../../controllers/association.controller');
 const user = require('../../controllers/user.controller');
+const role = require('../../controllers/role.controller');
 
 router.get('/', (req, res) => res.json({ message: 'Welcome to LogUTT' }));
 
@@ -63,5 +64,12 @@ router.get('/users', user.findAll);
 router.get('/users/:userId', user.findOne);
 router.put('/users/:userId', user.update);
 router.delete('/users/:userId', user.delete);
+
+// Roles routes
+router.post('/roles', role.create);
+router.get('/roles', role.findAll);
+router.get('/roles/:roleId', role.findOne);
+router.put('/roles/:roleId', role.update);
+router.delete('/roles/:roleId', role.delete);
 
 module.exports = router;
