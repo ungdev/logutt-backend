@@ -7,7 +7,7 @@
 #
 # Host: 127.0.0.1 (MySQL 5.5.5-10.5.9-MariaDB)
 # Database: logutt
-# Generation Time: 2021-04-22 11:34:35 +0000
+# Generation Time: 2021-06-01 12:01:24 +0000
 # ************************************************************
 
 
@@ -19,12 +19,6 @@ SET NAMES utf8mb4;
 /*!40014 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0 */;
 /*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
-
-DROP TABLES categories;
-DROP TABLES object_instances;
-DROP TABLES objects;
-DROP TABLES storage_spaces;
-DROP TABLES instances_storage;
 
 
 # Dump of table associations
@@ -100,6 +94,17 @@ CREATE TABLE `objects` (
 
 
 
+# Dump of table roles
+# ------------------------------------------------------------
+
+CREATE TABLE `roles` (
+  `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
+  `name` varchar(30) NOT NULL DEFAULT '',
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+
+
 # Dump of table storage_spaces
 # ------------------------------------------------------------
 
@@ -110,6 +115,38 @@ CREATE TABLE `storage_spaces` (
   `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
   `updated_at` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
   PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+
+
+# Dump of table users
+# ------------------------------------------------------------
+
+CREATE TABLE `users` (
+  `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
+  `first_name` varchar(30) DEFAULT NULL,
+  `last_name` varchar(30) DEFAULT NULL,
+  `email` varchar(50) DEFAULT NULL,
+  `phone` int(11) DEFAULT NULL,
+  `token` text DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+
+
+# Dump of table users_associations
+# ------------------------------------------------------------
+
+CREATE TABLE `users_associations` (
+  `user_id` int(11) unsigned NOT NULL AUTO_INCREMENT,
+  `association_id` int(11) unsigned NOT NULL,
+  `role_id` int(11) unsigned NOT NULL,
+  PRIMARY KEY (`user_id`,`association_id`),
+  KEY `association_id` (`association_id`),
+  KEY `role_id` (`role_id`),
+  CONSTRAINT `users_associations_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  CONSTRAINT `users_associations_ibfk_2` FOREIGN KEY (`association_id`) REFERENCES `associations` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  CONSTRAINT `users_associations_ibfk_3` FOREIGN KEY (`role_id`) REFERENCES `roles` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 
