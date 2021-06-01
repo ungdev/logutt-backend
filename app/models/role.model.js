@@ -18,7 +18,7 @@ Role.getAll = (result) => {
   sql.query('SELECT * FROM roles', SqlHandler.getAll(result));
 };
 
-newRole.findById = (roleId, result) => {
+Role.findById = (roleId, result) => {
   sql.query(
     `SELECT * FROM roles WHERE id = ${roleId}`,
     SqlHandler.findById(result)
