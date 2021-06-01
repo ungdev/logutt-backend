@@ -17,7 +17,7 @@ exports.login = async (req, res) => {
   const requestToken = await axios
     .post(
       `${API_URL}oauth/token`,
-      `grant_type=authorization_code&&authorization_code=${code}`,
+      `grant_type=authorization_code&&authorization_code=${code}&&scopes=public private_user_account`,
       {
         auth: {
           username: CLIENT_ID,
